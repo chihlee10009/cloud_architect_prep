@@ -41,10 +41,35 @@
                 </div>
             </div>
             <p class="text-xl font-semibold">You got {{ score }} out of {{ total }} questions correct.</p>
-            <a href="/"
-                class="mt-8 bg-slate-700 hover:bg-slate-600 text-white font-bold px-8 py-3 rounded-xl transition-all">Try
-                Another Quiz</a>
+            <div class="flex gap-3 mt-8">
+                <a href="/"
+                    class="bg-slate-700 hover:bg-slate-600 text-white font-bold px-8 py-3 rounded-xl transition-all">Try
+                    Another Quiz</a>
+                <a href="/stats"
+                    class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-3 rounded-xl transition-all">📊
+                    Performance Dashboard</a>
+            </div>
         </div>
+
+        <!-- Domain Summary for this session -->
+        {% if domain_results %}
+        <div class="mb-10">
+            <h2 class="text-lg font-bold mb-3">This Session by Domain</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                {% for domain, dr in domain_results.items() | sort %}
+                {% set tot = dr.correct + dr.incorrect %}
+                {% set pct = ((dr.correct / tot) * 100) | round(0) | int if tot > 0 else 0 %}
+                <div class="bg-slate-800 border border-slate-700 rounded-xl p-4">
+                    <p class="text-xs text-slate-500 font-semibold mb-1">{{ domain }}</p>
+                    <p
+                        class="text-xl font-extrabold {% if pct >= 70 %}text-emerald-400{% elif pct >= 50 %}text-amber-400{% else %}text-red-400{% endif %}">
+                        {{ pct }}%</p>
+                    <p class="text-xs text-slate-600 mt-0.5">{{ dr.correct }}/{{ tot }} correct</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
 
         <!-- Breakdown -->
         <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
@@ -64,7 +89,12 @@
                         <div class="flex-1">
                             <span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Question {{
                                 item.question.number }}</span>
-                            <h3 class="text-lg font-semibold leading-snug">{{ item.question.text }}</h3>
+                            {% if item.domain %}
+                            <span
+                                class="inline-block ml-2 px-2 py-0.5 bg-slate-700 rounded-full text-xs text-blue-400 font-semibold">{{
+                                item.domain }}</span>
+                            {% endif %}
+                            <h3 class="text-lg font-semibold leading-snug mt-1">{{ item.question.text }}</h3>
                         </div>
                         <div class="shrink-0">
                             {% if item.is_correct %}
@@ -99,6 +129,13 @@
                         <div class="text-sm font-bold text-slate-500 uppercase tracking-widest mt-4">Correct Answer
                         </div>
                         <div class="text-emerald-400 font-bold">{{ item.question.answers | join(', ') }}</div>
+
+                        {% if item.comment %}
+                        <div class="text-sm font-bold text-slate-500 uppercase tracking-widest mt-4">Your Remarks</div>
+                        <div
+                            class="bg-slate-900/40 border border-amber-500/20 rounded-xl p-3 text-amber-300 text-sm whitespace-pre-line leading-relaxed">
+                            {{ item.comment }}</div>
+                        {% endif %}
                     </div>
 
                     {% if not item.is_correct %}

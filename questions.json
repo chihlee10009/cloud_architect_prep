@@ -1,0 +1,1256 @@
+[
+    {
+        "id": 1,
+        "number": "1",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your company has decided to make a major revision of their API in order to create better experiences for their developers. They need to keep the old version of the API available and deployable, while allowing new customers and testers to try out the new API. They want to keep the same SSL and DNS records in place to serve both APIs.\nWhat should they do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Configure a new load balancer for the new version of the API"
+            },
+            {
+                "label": "B",
+                "text": "Reconfigure old clients to use a new endpoint for the new API"
+            },
+            {
+                "label": "C",
+                "text": "Have the old API forward traffic to the new API based on the path"
+            },
+            {
+                "label": "D",
+                "text": "Use separate backend pools for each API path behind the load balancer"
+            }
+        ],
+        "answers": [
+            "D"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 2,
+        "number": "2",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your company plans to migrate a multi-petabyte data set to the cloud. The data set must be available 24hrs a day. Your business analysts have experience only with using a SQL interface.\nHow should you store the data to optimize it for ease of analysis?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Load data into Google BigQuery"
+            },
+            {
+                "label": "B",
+                "text": "Insert data into Google Cloud SQL"
+            },
+            {
+                "label": "C",
+                "text": "Put flat files into Google Cloud Storage"
+            },
+            {
+                "label": "D",
+                "text": "Stream data into Google Cloud Datastore"
+            }
+        ],
+        "answers": [
+            "A"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 3,
+        "number": "3",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "The operations manager asks you for a list of recommended practices that she should consider when migrating a J2EE application to the cloud.\nWhich three practices should you recommend? (Choose three.)",
+        "options": [
+            {
+                "label": "A",
+                "text": "Port the application code to run on Google App Engine"
+            },
+            {
+                "label": "B",
+                "text": "Integrate Cloud Dataflow into the application to capture real-time metrics"
+            },
+            {
+                "label": "C",
+                "text": "Instrument the application with a monitoring tool like Stackdriver Debugger"
+            },
+            {
+                "label": "D",
+                "text": "Select an automation framework to reliably provision the cloud infrastructure"
+            },
+            {
+                "label": "E",
+                "text": "Deploy a continuous integration tool with automated testing in a staging environment"
+            },
+            {
+                "label": "F",
+                "text": "Migrate from MySQL to a managed NoSQL database like Google Cloud Datastore or Bigtable"
+            }
+        ],
+        "answers": [
+            "C",
+            "D",
+            "E"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 4,
+        "number": "4",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "A news feed web service has the following code running on Google App Engine. During peak load, users report that they can see news articles they already viewed.\nWhat is the most likely cause of this problem?\n![][image1]",
+        "options": [
+            {
+                "label": "A",
+                "text": "The session variable is local to just a single instance"
+            },
+            {
+                "label": "B",
+                "text": "The session variable is being overwritten in Cloud Datastore"
+            },
+            {
+                "label": "C",
+                "text": "The URL of the API needs to be modified to prevent caching"
+            },
+            {
+                "label": "D",
+                "text": "The HTTP Expires header needs to be set to -1 stop caching"
+            }
+        ],
+        "answers": [
+            "A"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 5,
+        "number": "5",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "An application development team believes their current logging tool will not meet their needs for their new cloud-based product. They want a better tool to capture errors and help them analyze their historical log data. You want to help them find a solution that meets their needs.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Direct them to download and install the Google StackDriver logging agent"
+            },
+            {
+                "label": "B",
+                "text": "Send them a list of online resources about logging best practices"
+            },
+            {
+                "label": "C",
+                "text": "Help them define their requirements and assess viable logging tools"
+            },
+            {
+                "label": "D",
+                "text": "Help them upgrade their current tool to take advantage of any new features"
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 6,
+        "number": "6",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You need to reduce the number of unplanned rollbacks of erroneous production deployments in your company's web hosting platform. Improvement to the QA/\nTest processes accomplished an 80% reduction.\nWhich additional two approaches can you take to further reduce the rollbacks? (Choose two.)",
+        "options": [
+            {
+                "label": "A",
+                "text": "Introduce a green-blue deployment model"
+            },
+            {
+                "label": "B",
+                "text": "Replace the QA environment with canary releases"
+            },
+            {
+                "label": "C",
+                "text": "Fragment the monolithic platform into microservices"
+            },
+            {
+                "label": "D",
+                "text": "Reduce the platform's dependency on relational database systems"
+            },
+            {
+                "label": "E",
+                "text": "Replace the platform's relational database systems with a NoSQL database"
+            }
+        ],
+        "answers": [
+            "A",
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 7,
+        "number": "7",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "To reduce costs, the Director of Engineering has required all developers to move their development infrastructure resources from on-premises virtual machines\n(VMs) to Google Cloud Platform. These resources go through multiple start/stop events during the day and require state to persist. You have been asked to design the process of running a development environment in Google Cloud while providing cost visibility to the finance department.\nWhich two steps should you take? (Choose two.)",
+        "options": [
+            {
+                "label": "A",
+                "text": "Use the - -no-auto-delete flag on all persistent disks and stop the VM"
+            },
+            {
+                "label": "B",
+                "text": "Use the - -auto-delete flag on all persistent disks and terminate the VM"
+            },
+            {
+                "label": "C",
+                "text": "Apply VM CPU utilization label and include it in the BigQuery billing export"
+            },
+            {
+                "label": "D",
+                "text": "Use Google BigQuery billing export and labels to associate cost to groups"
+            },
+            {
+                "label": "E",
+                "text": "Store all state into local SSD, snapshot the persistent disks, and terminate the VM"
+            },
+            {
+                "label": "F",
+                "text": "Store all state in Google Cloud Storage, snapshot the persistent disks, and terminate the VM"
+            }
+        ],
+        "answers": [
+            "A",
+            "D"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 8,
+        "number": "8",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your company wants to track whether someone is present in a meeting room reserved for a scheduled meeting. There are 1000 meeting rooms across 5 offices on 3 continents. Each room is equipped with a motion sensor that reports its status every second. The data from the motion detector includes only a sensor ID and several different discrete items of information. Analysts will use this data, together with information about account owners and office locations.\nWhich database type should you use?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Flat file"
+            },
+            {
+                "label": "B",
+                "text": "NoSQL"
+            },
+            {
+                "label": "C",
+                "text": "Relational"
+            },
+            {
+                "label": "D",
+                "text": "Blobstore"
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 9,
+        "number": "9",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You set up an autoscaling instance group to serve web traffic for an upcoming launch. After configuring the instance group as a backend service to an HTTP(S) load balancer, you notice that virtual machine (VM) instances are being terminated and re-launched every minute. The instances do not have a public IP address.\nYou have verified the appropriate web response is coming from each instance using the curl command. You want to ensure the backend is configured correctly.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Ensure that a firewall rules exists to allow source traffic on HTTP/HTTPS to reach the load balancer."
+            },
+            {
+                "label": "B",
+                "text": "Assign a public IP to each instance and configure a firewall rule to allow the load balancer to reach the instance public IP."
+            },
+            {
+                "label": "C",
+                "text": "Ensure that a firewall rule exists to allow load balancer health checks to reach the instances in the instance group."
+            },
+            {
+                "label": "D",
+                "text": "Create a tag on each instance with the name of the load balancer. Configure a firewall rule with the name of the load balancer as the source and the instance tag as the destination."
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 10,
+        "number": "10",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You write a Python script to connect to Google BigQuery from a Google Compute Engine virtual machine. The script is printing errors that it cannot connect to\nBigQuery.\nWhat should you do to fix the script?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Install the latest BigQuery API client library for Python"
+            },
+            {
+                "label": "B",
+                "text": "Run your script on a new virtual machine with the BigQuery access scope enabled"
+            },
+            {
+                "label": "C",
+                "text": "Create a new service account with BigQuery access and execute your script with that user"
+            },
+            {
+                "label": "D",
+                "text": "Install the bq component for gcloud with the command gcloud components install bq."
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 11,
+        "number": "11",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your customer is moving an existing corporate application to Google Cloud Platform from an on-premises data center. The business owners require minimal user disruption. There are strict security team requirements for storing passwords.\nWhat authentication strategy should they use?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Use G Suite Password Sync to replicate passwords into Google"
+            },
+            {
+                "label": "B",
+                "text": "Federate authentication via SAML 2.0 to the existing Identity Provider"
+            },
+            {
+                "label": "C",
+                "text": "Provision users in Google using the Google Cloud Directory Sync tool"
+            },
+            {
+                "label": "D",
+                "text": "Ask users to set their Google password to match their corporate password"
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 12,
+        "number": "12",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your company has successfully migrated to the cloud and wants to analyze their data stream to optimize operations. They do not have any existing code for this analysis, so they are exploring all their options. These options include a mix of batch and stream processing, as they are running some hourly jobs and live- processing some data as it comes in.\nWhich technology should they use for this?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Google Cloud Dataproc"
+            },
+            {
+                "label": "B",
+                "text": "Google Cloud Dataflow"
+            },
+            {
+                "label": "C",
+                "text": "Google Container Engine with Bigtable"
+            },
+            {
+                "label": "D",
+                "text": "Google Compute Engine with Google BigQuery"
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 13,
+        "number": "13",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your customer is receiving reports that their recently updated Google App Engine application is taking approximately 30 seconds to load for some of their users.\nThis behavior was not reported before the update.\nWhat strategy should you take?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Work with your ISP to diagnose the problem"
+            },
+            {
+                "label": "B",
+                "text": "Open a support ticket to ask for network capture and flow data to diagnose the problem, then roll back your application"
+            },
+            {
+                "label": "C",
+                "text": "Roll back to an earlier known good release initially, then use Stackdriver Trace and Logging to diagnose the problem in a development/test/staging environment"
+            },
+            {
+                "label": "D",
+                "text": "Roll back to an earlier known good release, then push the release again at a quieter period to investigate. Then use Stackdriver Trace and Logging to diagnose the problem"
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 14,
+        "number": "14",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "A production database virtual machine on Google Compute Engine has an ext4-formatted persistent disk for data files. The database is about to run out of storage space.\nHow can you remediate the problem with the least amount of downtime?",
+        "options": [
+            {
+                "label": "A",
+                "text": "In the Cloud Platform Console, increase the size of the persistent disk and use the resize2fs command in Linux."
+            },
+            {
+                "label": "B",
+                "text": "Shut down the virtual machine, use the Cloud Platform Console to increase the persistent disk size, then restart the virtual machine"
+            },
+            {
+                "label": "C",
+                "text": "In the Cloud Platform Console, increase the size of the persistent disk and verify the new space is ready to use with the fdisk command in Linux"
+            },
+            {
+                "label": "D",
+                "text": "In the Cloud Platform Console, create a new persistent disk attached to the virtual machine, format and mount it, and configure the database service to move the files to the new disk"
+            },
+            {
+                "label": "E",
+                "text": "In the Cloud Platform Console, create a snapshot of the persistent disk restore the snapshot to a new larger disk, unmount the old disk, mount the new disk and restart the database service"
+            }
+        ],
+        "answers": [
+            "A"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 15,
+        "number": "15",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your application needs to process credit card transactions. You want the smallest scope of Payment Card Industry (PCI) compliance without compromising the ability to analyze transactional data and trends relating to which payment methods are used.\nHow should you design your architecture?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Create a tokenizer service and store only tokenized data"
+            },
+            {
+                "label": "B",
+                "text": "Create separate projects that only process credit card data"
+            },
+            {
+                "label": "C",
+                "text": "Create separate subnetworks and isolate the components that process credit card data"
+            },
+            {
+                "label": "D",
+                "text": "Streamline the audit discovery phase by labeling all of the virtual machines (VMs) that process PCI data"
+            },
+            {
+                "label": "E",
+                "text": "Enable Logging export to Google BigQuery and use ACLs and views to scope the data shared with the auditor"
+            }
+        ],
+        "answers": [
+            "A"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 16,
+        "number": "16",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You have been asked to select the storage system for the click-data of your company's large portfolio of websites. This data is streamed in from a custom website analytics package at a typical rate of 6,000 clicks per minute. With bursts of up to 8,500 clicks per second. It must have been stored for future analysis by your data science and user experience teams.\nWhich storage infrastructure should you choose?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Google Cloud SQL"
+            },
+            {
+                "label": "B",
+                "text": "Google Cloud Bigtable"
+            },
+            {
+                "label": "C",
+                "text": "Google Cloud Storage"
+            },
+            {
+                "label": "D",
+                "text": "Google Cloud Datastore"
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 17,
+        "number": "17",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You are creating a solution to remove backup files older than 90 days from your backup Cloud Storage bucket. You want to optimize ongoing Cloud Storage spend.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Write a lifecycle management rule in XML and push it to the bucket with gsutil"
+            },
+            {
+                "label": "B",
+                "text": "Write a lifecycle management rule in JSON and push it to the bucket with gsutil"
+            },
+            {
+                "label": "C",
+                "text": "Schedule a cron script using gsutil ls \u05d2\u20ac\"lr gs://backups/\\*\\* to find and remove items older than 90 days"
+            },
+            {
+                "label": "D",
+                "text": "Schedule a cron script using gsutil ls \u05d2\u20ac\"l gs://backups/\\*\\* to find and remove items older than 90 days and schedule it with cron"
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 18,
+        "number": "18",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your company is forecasting a sharp increase in the number and size of Apache Spark and Hadoop jobs being run on your local datacenter. You want to utilize the cloud to help you scale this upcoming demand with the least amount of operations work and code change.\nWhich product should you use?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Google Cloud Dataflow"
+            },
+            {
+                "label": "B",
+                "text": "Google Cloud Dataproc"
+            },
+            {
+                "label": "C",
+                "text": "Google Compute Engine"
+            },
+            {
+                "label": "D",
+                "text": "Google Kubernetes Engine"
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 19,
+        "number": "19",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "The database administration team has asked you to help them improve the performance of their new database server running on Google Compute Engine. The database is for importing and normalizing their performance statistics and is built with MySQL running on Debian Linux. They have an n1-standard-8 virtual machine with 80 GB of SSD persistent disk.\nWhat should they change to get better performance from this system?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Increase the virtual machine's memory to 64 GB"
+            },
+            {
+                "label": "B",
+                "text": "Create a new virtual machine running PostgreSQL"
+            },
+            {
+                "label": "C",
+                "text": "Dynamically resize the SSD persistent disk to 500 GB"
+            },
+            {
+                "label": "D",
+                "text": "Migrate their performance metrics warehouse to BigQuery"
+            },
+            {
+                "label": "E",
+                "text": "Modify all of their batch jobs to use bulk inserts into the database"
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 20,
+        "number": "20",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You want to optimize the performance of an accurate, real-time, weather-charting application. The data comes from 50,000 sensors sending 10 readings a second, in the format of a timestamp and sensor reading.\nWhere should you store the data?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Google BigQuery"
+            },
+            {
+                "label": "B",
+                "text": "Google Cloud SQL"
+            },
+            {
+                "label": "C",
+                "text": "Google Cloud Bigtable"
+            },
+            {
+                "label": "D",
+                "text": "Google Cloud Storage"
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 21,
+        "number": "21",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your company's user-feedback portal comprises a standard LAMP stack replicated across two zones. It is deployed in the us-central1 region and uses autoscaled managed instance groups on all layers, except the database. Currently, only a small group of select customers have access to the portal. The portal meets a 99,99% availability SLA under these conditions. However next quarter, your company will be making the portal available to all users, including unauthenticated users. You need to develop a resiliency testing strategy to ensure the system maintains the SLA once they introduce additional user load.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Capture existing users input, and replay captured user load until autoscale is triggered on all layers. At the same time, terminate all resources in one of the zones"
+            },
+            {
+                "label": "B",
+                "text": "Create synthetic random user input, replay synthetic load until autoscale logic is triggered on at least one layer, and introduce \u05d2\u20acchaos\u05d2\u20ac to the system by terminating random resources on both zones"
+            },
+            {
+                "label": "C",
+                "text": "Expose the new system to a larger group of users, and increase group size each day until autoscale logic is triggered on all layers. At the same time, terminate random resources on both zones"
+            },
+            {
+                "label": "D",
+                "text": "Capture existing users input, and replay captured user load until resource utilization crosses 80%. Also, derive estimated number of users based on existing user's usage of the app, and deploy enough resources to handle 200% of expected load"
+            }
+        ],
+        "answers": [
+            "A"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 22,
+        "number": "22",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "One of the developers on your team deployed their application in Google Container Engine with the Dockerfile below. They report that their application deployments are taking too long.\n![][image2]\nYou want to optimize this Dockerfile for faster deployment times without adversely affecting the app's functionality.\nWhich two actions should you take? (Choose two.)",
+        "options": [
+            {
+                "label": "A",
+                "text": "Remove Python after running pip"
+            },
+            {
+                "label": "B",
+                "text": "Remove dependencies from requirements.txt"
+            },
+            {
+                "label": "C",
+                "text": "Use a slimmed-down base image like Alpine Linux"
+            },
+            {
+                "label": "D",
+                "text": "Use larger machine types for your Google Container Engine node pools"
+            },
+            {
+                "label": "E",
+                "text": "Copy the source after he package dependencies (Python and pip) are installed"
+            }
+        ],
+        "answers": [
+            "C",
+            "E"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 23,
+        "number": "23",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your solution is producing performance bugs in production that you did not see in staging and test environments. You want to adjust your test and deployment procedures to avoid this problem in the future.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Deploy fewer changes to production"
+            },
+            {
+                "label": "B",
+                "text": "Deploy smaller changes to production"
+            },
+            {
+                "label": "C",
+                "text": "Increase the load on your test and staging environments"
+            },
+            {
+                "label": "D",
+                "text": "Deploy changes to a small subset of users before rolling out to production"
+            }
+        ],
+        "answers": [
+            "D"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 24,
+        "number": "24",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "A small number of API requests to your microservices-based application take a very long time. You know that each request to the API can traverse many services.\nYou want to know which service takes the longest in those cases.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Set timeouts on your application so that you can fail requests faster"
+            },
+            {
+                "label": "B",
+                "text": "Send custom metrics for each of your requests to Stackdriver Monitoring"
+            },
+            {
+                "label": "C",
+                "text": "Use Stackdriver Monitoring to look for insights that show when your API latencies are high"
+            },
+            {
+                "label": "D",
+                "text": "Instrument your application with Stackdriver Trace in order to break down the request latencies at each microservice"
+            }
+        ],
+        "answers": [
+            "D"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 25,
+        "number": "25",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "During a high traffic portion of the day, one of your relational databases crashes, but the replica is never promoted to a master. You want to avoid this in the future.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Use a different database"
+            },
+            {
+                "label": "B",
+                "text": "Choose larger instances for your database"
+            },
+            {
+                "label": "C",
+                "text": "Create snapshots of your database more regularly"
+            },
+            {
+                "label": "D",
+                "text": "Implement routinely scheduled failovers of your databases"
+            }
+        ],
+        "answers": [
+            "D"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 26,
+        "number": "26",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your organization requires that metrics from all applications be retained for 5 years for future analysis in possible legal proceedings.\nWhich approach should you use?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Grant the security team access to the logs in each Project"
+            },
+            {
+                "label": "B",
+                "text": "Configure Stackdriver Monitoring for all Projects, and export to BigQuery"
+            },
+            {
+                "label": "C",
+                "text": "Configure Stackdriver Monitoring for all Projects with the default retention policies"
+            },
+            {
+                "label": "D",
+                "text": "Configure Stackdriver Monitoring for all Projects, and export to Google Cloud Storage"
+            }
+        ],
+        "answers": [
+            "D"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 27,
+        "number": "27",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your company has decided to build a backup replica of their on-premises user authentication PostgreSQL database on Google Cloud Platform. The database is 4\nTB, and large updates are frequent. Replication requires private address space communication.\nWhich networking approach should you use?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Google Cloud Dedicated Interconnect"
+            },
+            {
+                "label": "B",
+                "text": "Google Cloud VPN connected to the data center network"
+            },
+            {
+                "label": "C",
+                "text": "A NAT and TLS translation gateway installed on-premises"
+            },
+            {
+                "label": "D",
+                "text": "A Google Compute Engine instance with a VPN server installed connected to the data center network"
+            }
+        ],
+        "answers": [
+            "A"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 28,
+        "number": "28",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Auditors visit your teams every 12 months and ask to review all the Google Cloud Identity and Access Management (Cloud IAM) policy changes in the previous 12 months. You want to streamline and expedite the analysis and audit process.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Create custom Google Stackdriver alerts and send them to the auditor"
+            },
+            {
+                "label": "B",
+                "text": "Enable Logging export to Google BigQuery and use ACLs and views to scope the data shared with the auditor"
+            },
+            {
+                "label": "C",
+                "text": "Use cloud functions to transfer log entries to Google Cloud SQL and use ACLs and views to limit an auditor's view"
+            },
+            {
+                "label": "D",
+                "text": "Enable Google Cloud Storage (GCS) log export to audit logs into a GCS bucket and delegate access to the bucket"
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 29,
+        "number": "29",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your organization is designing a large distributed application with 30 microservices. Each of your distributed microservices needs to connect to a database back-end. You want to store the credentials securely.\nWhere should you store the credentials?",
+        "options": [
+            {
+                "label": "A",
+                "text": "In the source code"
+            },
+            {
+                "label": "B",
+                "text": "In an environment variable"
+            },
+            {
+                "label": "C",
+                "text": "In a secret management system"
+            },
+            {
+                "label": "D",
+                "text": "In a config file that has restricted access through ACLs"
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 30,
+        "number": "30",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "A lead engineer wrote a custom tool that deploys virtual machines in the legacy data center. He wants to migrate the custom tool to the new cloud environment.\nYou want to advocate for the adoption of Google Cloud Deployment Manager.\nWhat are two business risks of migrating to Cloud Deployment Manager? (Choose two.)",
+        "options": [
+            {
+                "label": "A",
+                "text": "Cloud Deployment Manager uses Python"
+            },
+            {
+                "label": "B",
+                "text": "Cloud Deployment Manager APIs could be deprecated in the future"
+            },
+            {
+                "label": "C",
+                "text": "Cloud Deployment Manager is unfamiliar to the company's engineers"
+            },
+            {
+                "label": "D",
+                "text": "Cloud Deployment Manager requires a Google APIs service account to run"
+            },
+            {
+                "label": "E",
+                "text": "Cloud Deployment Manager can be used to permanently delete cloud resources"
+            },
+            {
+                "label": "F",
+                "text": "Cloud Deployment Manager only supports automation of Google Cloud resources"
+            }
+        ],
+        "answers": [
+            "C",
+            "F"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 31,
+        "number": "31",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "A development manager is building a new application. He asks you to review his requirements and identify what cloud technologies he can use to meet them. The application must:\n1. Be based on open-source technology for cloud portability\n2. Dynamically scale compute capacity based on demand\n3. Support continuous software delivery\n4. Run multiple segregated copies of the same application stack\n5. Deploy application bundles using dynamic templates\n6. Route network traffic to specific services based on URL\nWhich combination of technologies will meet all of his requirements?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Google Kubernetes Engine, Jenkins, and Helm"
+            },
+            {
+                "label": "B",
+                "text": "Google Kubernetes Engine and Cloud Load Balancing"
+            },
+            {
+                "label": "C",
+                "text": "Google Kubernetes Engine and Cloud Deployment Manager"
+            },
+            {
+                "label": "D",
+                "text": "Google Kubernetes Engine, Jenkins, and Cloud Load Balancing"
+            }
+        ],
+        "answers": [
+            "A"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 32,
+        "number": "32",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You have created several pre-emptible Linux virtual machine instances using Google Compute Engine. You want to properly shut down your application before the virtual machines are preempted.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Create a shutdown script named k99.shutdown in the /etc/rc.6.d/ directory"
+            },
+            {
+                "label": "B",
+                "text": "Create a shutdown script registered as a xinetd service in Linux and configure a Stackdriver endpoint check to call the service"
+            },
+            {
+                "label": "C",
+                "text": "Create a shutdown script and use it as the value for a new metadata entry with the key shutdown-script in the Cloud Platform Console when you create the new virtual machine instance"
+            },
+            {
+                "label": "D",
+                "text": "Create a shutdown script, registered as a xinetd service in Linux, and use the gcloud compute instances add-metadata command to specify the service URL as the value for a new metadata entry with the key shutdown-script-url"
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 33,
+        "number": "33",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your organization has a 3-tier web application deployed in the same network on Google Cloud Platform. Each tier (web, API, and database) scales independently of the others. Network traffic should flow through the web to the API tier and then on to the database tier. Traffic should not flow between the web and the database tier.\nHow should you configure the network?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Add each tier to a different subnetwork"
+            },
+            {
+                "label": "B",
+                "text": "Set up software based firewalls on individual VMs"
+            },
+            {
+                "label": "C",
+                "text": "Add tags to each tier and set up routes to allow the desired traffic flow"
+            },
+            {
+                "label": "D",
+                "text": "Add tags to each tier and set up firewall rules to allow the desired traffic flow"
+            }
+        ],
+        "answers": [
+            "D"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 34,
+        "number": "34",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your development team has installed a new Linux kernel module on the batch servers in Google Compute Engine (GCE) virtual machines (VMs) to speed up the nightly batch process. Two days after the installation, 50% of the batch servers failed the nightly batch run. You want to collect details on the failure to pass back to the development team.\nWhich three actions should you take? (Choose three.)",
+        "options": [
+            {
+                "label": "A",
+                "text": "Use Stackdriver Logging to search for the module log entries"
+            },
+            {
+                "label": "B",
+                "text": "Read the debug GCE Activity log using the API or Cloud Console"
+            },
+            {
+                "label": "C",
+                "text": "Use gcloud or Cloud Console to connect to the serial console and observe the logs"
+            },
+            {
+                "label": "D",
+                "text": "Identify whether a live migration event of the failed server occurred, using in the activity log"
+            },
+            {
+                "label": "E",
+                "text": "Adjust the Google Stackdriver timeline to match the failure time, and observe the batch server metrics"
+            },
+            {
+                "label": "F",
+                "text": "Export a debug VM into an image, and run the image on a local server where kernel log messages will be displayed on the native screen"
+            }
+        ],
+        "answers": [
+            "A",
+            "C",
+            "D"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 35,
+        "number": "35",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your company wants to try out the cloud with low risk. They want to archive approximately 100 TB of their log data to the cloud and test the analytics features available to them there, while also retaining that data as a long-term disaster recovery backup.\nWhich two steps should you take? (Choose two.)",
+        "options": [
+            {
+                "label": "A",
+                "text": "Load logs into Google BigQuery"
+            },
+            {
+                "label": "B",
+                "text": "Load logs into Google Cloud SQL"
+            },
+            {
+                "label": "C",
+                "text": "Import logs into Google Stackdriver"
+            },
+            {
+                "label": "D",
+                "text": "Insert logs into Google Cloud Bigtable"
+            },
+            {
+                "label": "E",
+                "text": "Upload log files into Google Cloud Storage"
+            }
+        ],
+        "answers": [
+            "A",
+            "E"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 36,
+        "number": "36",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You created a pipeline that can deploy your source code changes to your infrastructure in instance groups for self-healing. One of the changes negatively affects your key performance indicator. You are not sure how to fix it, and investigation could take up to a week.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Log in to a server, and iterate on the fox locally"
+            },
+            {
+                "label": "B",
+                "text": "Revert the source code change, and rerun the deployment pipeline"
+            },
+            {
+                "label": "C",
+                "text": "Log into the servers with the bad code change, and swap in the previous code"
+            },
+            {
+                "label": "D",
+                "text": "Change the instance group template to the previous one, and delete all instances"
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 37,
+        "number": "37",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your organization wants to control IAM policies for different departments independently, but centrally.\nWhich approach should you take?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Multiple Organizations with multiple Folders"
+            },
+            {
+                "label": "B",
+                "text": "Multiple Organizations, one for each department"
+            },
+            {
+                "label": "C",
+                "text": "A single Organization with Folders for each department"
+            },
+            {
+                "label": "D",
+                "text": "A single Organization with multiple projects, each with a central owner"
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 38,
+        "number": "38",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You deploy your custom Java application to Google App Engine. It fails to deploy and gives you the following stack trace.\nWhat should you do?\n![][image3]",
+        "options": [
+            {
+                "label": "A",
+                "text": "Upload missing JAR files and redeploy your application."
+            },
+            {
+                "label": "B",
+                "text": "Digitally sign all of your JAR files and redeploy your application"
+            },
+            {
+                "label": "C",
+                "text": "Recompile the CLoakedServlet class using and MD5 hash instead of SHA1"
+            }
+        ],
+        "answers": [
+            "A"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 39,
+        "number": "39",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "You are designing a mobile chat application. You want to ensure people cannot spoof chat messages, by providing a message were sent by a specific user.\nWhat should you do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Tag messages client side with the originating user identifier and the destination user."
+            },
+            {
+                "label": "B",
+                "text": "Encrypt the message client side using block-based encryption with a shared key."
+            },
+            {
+                "label": "C",
+                "text": "Use public key infrastructure (PKI) to encrypt the message client side using the originating user's private key."
+            },
+            {
+                "label": "D",
+                "text": "Use a trusted certificate authority to enable SSL connectivity between the client application and the server."
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 40,
+        "number": "40",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "As part of implementing their disaster recovery plan, your company is trying to replicate their production MySQL database from their private data center to their GCP project using a Google Cloud VPN connection. They are experiencing latency issues and a small amount of packet loss that is disrupting the replication.\nWhat should they do?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Configure their replication to use UDP."
+            },
+            {
+                "label": "B",
+                "text": "Configure a Google Cloud Dedicated Interconnect."
+            },
+            {
+                "label": "C",
+                "text": "Restore their database daily using Google Cloud SQL."
+            },
+            {
+                "label": "D",
+                "text": "Add additional VPN connections and load balance them."
+            },
+            {
+                "label": "E",
+                "text": "Send the replicated transaction to Google Cloud Pub/Sub."
+            }
+        ],
+        "answers": [
+            "B"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    },
+    {
+        "id": 41,
+        "number": "41",
+        "topic": "Google Cloud Professional Cloud Architect (QA Guide)",
+        "context": "",
+        "text": "Your customer support tool logs all email and chat conversations to Cloud Bigtable for retention and analysis. What is the recommended approach for sanitizing this data of personally identifiable information or payment card information before initial storage?",
+        "options": [
+            {
+                "label": "A",
+                "text": "Hash all data using SHA256"
+            },
+            {
+                "label": "B",
+                "text": "Encrypt all data using elliptic curve cryptography"
+            },
+            {
+                "label": "C",
+                "text": "De-identify the data with the Cloud Data Loss Prevention API"
+            },
+            {
+                "label": "D",
+                "text": "Use regular expressions to find and redact phone numbers, email addresses, and credit card numbers"
+            }
+        ],
+        "answers": [
+            "C"
+        ],
+        "explanation": "Verified correct answer from the official QA guide."
+    }
+]

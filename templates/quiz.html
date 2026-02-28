@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz | Cloud Architect Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 text-white min-h-screen p-6">
+    <div class="max-w-4xl mx-auto">
+        <!-- Progress Bar -->
+        <div class="mb-10">
+            <div class="flex justify-between items-end mb-2">
+                <div>
+                    <span class="text-blue-400 font-bold text-sm uppercase tracking-wider">Progress</span>
+                    <h2 class="text-xl font-bold">Question {{ current }} <span class="text-slate-500 font-normal">of {{
+                            total }}</span></h2>
+                </div>
+                <div class="text-right">
+                    <span class="text-slate-400 text-sm font-semibold tracking-tighter">{{ progress }}%</span>
+                </div>
+            </div>
+            <div class="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-blue-600 to-emerald-500 transition-all duration-500"
+                    style="width: {{ progress }}%"></div>
+            </div>
+        </div>
+
+        <form action="/submit_answer" method="POST" class="space-y-8">
+            <input type="hidden" name="question_id" value="{{ question.id }}">
+
+            <!-- Question Content -->
+            <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8 shadow-xl">
+                {% if question.topic %}
+                <div
+                    class="inline-block px-3 py-1 bg-slate-700 rounded-full text-xs font-bold text-blue-400 mb-4 tracking-tight">
+                    {{ question.topic }}
+                </div>
+                {% endif %}
+
+                {% if question.context %}
+                <div
+                    class="bg-slate-900/50 rounded-2xl p-6 mb-6 border border-slate-700/50 text-slate-300 text-sm leading-relaxed max-h-64 overflow-y-auto">
+                    <p class="whitespace-pre-line">{{ question.context }}</p>
+                </div>
+                {% endif %}
+
+                <h3 class="text-2xl font-semibold leading-snug">
+                    {{ question.text }}
+                </h3>
+            </div>
+
+            <!-- Options -->
+            <div class="grid gap-4">
+                {% set type = "checkbox" if "Choose" in question.text else "radio" %}
+                {% for opt in question.options %}
+                <label
+                    class="group relative flex items-center p-6 bg-slate-800 border-2 border-slate-700 rounded-2xl cursor-pointer hover:border-blue-500 hover:bg-slate-750 transition-all">
+                    <input type="{{ type }}" name="answer" value="{{ opt.label }}" class="hidden peer">
+                    <div
+                        class="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-900 border border-slate-700 group-hover:border-blue-500 peer-checked:bg-blue-600 peer-checked:border-blue-500 transition-all font-bold text-sm mr-6">
+                        {{ opt.label }}
+                    </div>
+                    <span class="flex-1 text-lg text-slate-200 group-hover:text-white transition-colors">{{ opt.text
+                        }}</span>
+
+                    <!-- Checkmark / Indicator -->
+                    <div class="opacity-0 peer-checked:opacity-100 transition-opacity">
+                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                </label>
+                {% endfor %}
+            </div>
+
+            <!-- Action -->
+            <div class="flex justify-end pt-4">
+                <button type="submit"
+                    class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-10 py-4 rounded-2xl shadow-lg transition-transform active:scale-95 flex items-center gap-2 group">
+                    Next Question
+                    <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

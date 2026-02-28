@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results | Cloud Architect Prep</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-900 text-white min-h-screen p-6">
+    <div class="max-w-4xl mx-auto pb-20">
+        <!-- Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold mb-2">Quiz Complete!</h1>
+            <p class="text-slate-400">Here is how you performed.</p>
+        </div>
+
+        <!-- Score Card -->
+        <div
+            class="bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 rounded-3xl p-10 shadow-2xl mb-12 flex flex-col items-center">
+            <div class="relative w-48 h-48 mb-6">
+                <!-- Circular Progress SVG -->
+                <svg class="w-full h-full transform -rotate-90">
+                    <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent"
+                        class="text-slate-800" />
+                    <circle cx="96" cy="96" r="88" stroke="currentColor" stroke-width="12" fill="transparent"
+                        class="{{ 'text-emerald-500' if percent >= 80 else 'text-blue-500' if percent >= 60 else 'text-red-500' }}"
+                        stroke-dasharray="553" stroke-dashoffset="{{ 553 - (553 * percent / 100) }}"
+                        stroke-linecap="round" />
+                </svg>
+                <div class="absolute inset-0 flex flex-col items-center justify-center">
+                    <span class="text-5xl font-black">{{ percent }}%</span>
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-500 mt-1">Final Score</span>
+                </div>
+            </div>
+            <p class="text-xl font-semibold">You got {{ score }} out of {{ total }} questions correct.</p>
+            <a href="/"
+                class="mt-8 bg-slate-700 hover:bg-slate-600 text-white font-bold px-8 py-3 rounded-xl transition-all">Try
+                Another Quiz</a>
+        </div>
+
+        <!-- Breakdown -->
+        <h2 class="text-2xl font-bold mb-6 flex items-center gap-3">
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            Review Breakdown
+        </h2>
+
+        <div class="space-y-6">
+            {% for item in results %}
+            <div
+                class="bg-slate-800 border {{ 'border-emerald-500/30' if item.is_correct else 'border-red-500/30' }} rounded-2xl overflow-hidden shadow-lg">
+                <div class="p-6">
+                    <div class="flex items-start justify-between gap-4 mb-4">
+                        <div class="flex-1">
+                            <span class="text-xs font-bold text-slate-500 uppercase tracking-tighter">Question {{
+                                item.question.number }}</span>
+                            <h3 class="text-lg font-semibold leading-snug">{{ item.question.text }}</h3>
+                        </div>
+                        <div class="shrink-0">
+                            {% if item.is_correct %}
+                            <span
+                                class="bg-emerald-500/10 text-emerald-400 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Correct
+                            </span>
+                            {% else %}
+                            <span
+                                class="bg-red-500/10 text-red-400 px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd"
+                                        d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                                Incorrect
+                            </span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="space-y-2 mb-6">
+                        <div class="text-sm font-bold text-slate-500 uppercase tracking-widest">Your Answer</div>
+                        <div class="text-slate-300">{{ item.user_answer | join(', ') if item.user_answer else 'No
+                            answer' }}</div>
+
+                        <div class="text-sm font-bold text-slate-500 uppercase tracking-widest mt-4">Correct Answer
+                        </div>
+                        <div class="text-emerald-400 font-bold">{{ item.question.answers | join(', ') }}</div>
+                    </div>
+
+                    {% if not item.is_correct %}
+                    <div class="bg-blue-900/20 border border-blue-500/20 rounded-xl p-5 mt-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <svg class="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M11 3a1 1 0 10-2 0v1h2V3zM5.884 6.68a1 1 0 10-1.454-1.36L2.73 7.02a1.001 1.001 0 00.326 1.639l.6.233 2.228-2.212zM14.746 5.72a1 1 0 00-1.492 1.332l2.228 2.212.6-.233a1 1 0 00.326-1.639l-1.662-1.672zM4.139 11.012a1 1 0 00-1.978.304c.056.368.106.74.15 1.111a1 1 0 101.984-.242c-.04-.337-.085-.67-.136-1.023zM16.143 12.427a1 1 0 001.984.242c.044-.37.094-.743.15-1.111a1 1 0 10-1.978-.304c-.051.353-.096.686-.136 1.023zM5.438 15.143a1 1 0 00-1.36 1.454l1.704 1.704a1 1 0 101.414-1.414l-1.758-1.744zM14.152 16.597a1 1 0 001.414 1.414l1.704-1.704a1 1 0 10-1.454-1.36l-1.664 1.65zM10 5a5 5 0 00-5 5c0 .546.087 1.071.248 1.562.155.462.453.864.832 1.156A6.974 6.974 0 0110 15a6.974 6.974 0 013.92-2.282c.38-.292.677-.694.832-1.156.161-.491.248-1.016.248-1.562a5 5 0 00-5-5z" />
+                            </svg>
+                            <span class="font-bold text-blue-400">NotebookLM Prompt</span>
+                        </div>
+                        <textarea readonly
+                            class="w-full bg-slate-900/50 border border-slate-700/50 rounded-lg p-3 text-xs text-slate-400 h-24 font-mono outline-none resize-none focus:text-slate-300 transition-colors">{{ item.prompt }}</textarea>
+                        <button onclick="navigator.clipboard.writeText('{{ item.prompt | escape }}')"
+                            class="mt-2 text-[10px] font-bold text-blue-500 hover:text-blue-400 uppercase tracking-widest flex items-center gap-1">
+                            Copy to Clipboard
+                        </button>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="bg-slate-900/40 px-6 py-4 border-t border-slate-700/50">
+                    <p class="text-sm text-slate-400"><strong class="text-slate-300">Explanation:</strong> {{
+                        item.question.explanation }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

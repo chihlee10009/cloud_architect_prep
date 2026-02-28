@@ -152,13 +152,26 @@ class QuizHandler(http.server.BaseHTTPRequestHandler):
                 else:
                     dr['incorrect'] += 1
 
+                # Build full label+text representations
+                opt_map = {o['label']: o['text'] for o in q['options']}
+                correct_full = [
+                    {'label': lbl, 'text': opt_map.get(lbl, '')}
+                    for lbl in q['answers']
+                ]
+                user_full = [
+                    {'label': lbl, 'text': opt_map.get(lbl, '')}
+                    for lbl in u_ans
+                ]
+
                 results_list.append({
-                    'question':    q,
-                    'user_answer': u_ans,
-                    'comment':     comment,
-                    'is_correct':  is_correct,
-                    'domain':      domain,
-                    'prompt':      self._generate_prompt(q) if not is_correct else None,
+                    'question':      q,
+                    'user_answer':   u_ans,
+                    'user_full':     user_full,
+                    'correct_full':  correct_full,
+                    'comment':       comment,
+                    'is_correct':    is_correct,
+                    'domain':        domain,
+                    'prompt':        self._generate_prompt(q) if not is_correct else None,
                 })
 
             percent = int(score / len(quiz_qs) * 100) if quiz_qs else 0

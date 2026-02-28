@@ -1,4 +1,5 @@
 ref*
 .env
 env-*
+questions.json
 *.json

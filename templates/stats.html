@@ -25,10 +25,19 @@
                 <p class="text-slate-500 mt-1 text-sm">Tracks correct vs incorrect across all quiz sessions over time.
                 </p>
             </div>
-            <a href="/"
-                class="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-2xl transition-all text-sm">
-                ← Take a Quiz
-            </a>
+            <div class="flex items-center gap-3">
+                <form method="POST" action="/reset_stats" onsubmit="return confirm('Are you sure you want to reset all performance metrics? This cannot be undone.');">
+                    <button type="submit"
+                        class="flex items-center gap-2 px-5 py-2.5 bg-red-600/80 hover:bg-red-500 text-white font-semibold rounded-2xl transition-all text-sm">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                        Reset All
+                    </button>
+                </form>
+                <a href="/"
+                    class="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-2xl transition-all text-sm">
+                    ← Take a Quiz
+                </a>
+            </div>
         </div>
 
         {% set dt = stats.domain_totals %}
@@ -50,7 +59,10 @@
         {% set total_answered = total_correct + total_incorrect %}
         {% set overall_pct = ((total_correct / total_answered) * 100) | round(1) if total_answered > 0 else 0 %}
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {% set seen_count = stats.seen_questions | length %}
+        {% set unseen_count = total_questions - seen_count %}
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700">
                 <p class="text-xs text-slate-500 font-semibold uppercase tracking-widest mb-1">Sessions</p>
                 <p class="text-3xl font-extrabold text-white">{{ stats.sessions | length }}</p>
@@ -75,6 +87,35 @@
                 {% else %}
                 <p class="text-3xl font-extrabold text-slate-600">—</p>
                 {% endif %}
+            </div>
+            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700">
+                <p class="text-xs text-slate-500 font-semibold uppercase tracking-widest mb-1">Seen / Total</p>
+                <p class="text-3xl font-extrabold text-blue-400">{{ seen_count }}<span class="text-lg text-slate-600">/{{ total_questions }}</span></p>
+                <p class="text-xs text-slate-600 mt-1">{{ unseen_count }} unseen</p>
+            </div>
+            <div class="bg-slate-800 rounded-2xl p-5 border border-slate-700">
+                <p class="text-xs text-slate-500 font-semibold uppercase tracking-widest mb-1">Mastered (3x ✓)</p>
+                <p class="text-3xl font-extrabold text-emerald-400">{{ retired_count }}</p>
+                <p class="text-xs text-slate-600 mt-1">excluded from quizzes</p>
+            </div>
+        </div>
+
+        <!-- Seen vs Unseen progress bar -->
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl p-5">
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-sm font-bold">Question Coverage</p>
+                <p class="text-xs text-slate-500">{{ seen_count }} of {{ total_questions }} questions seen ({{ ((seen_count / total_questions) * 100) | round(0) | int if total_questions > 0 else 0 }}%)</p>
+            </div>
+            <div class="h-3 w-full bg-slate-900 rounded-full overflow-hidden flex">
+                {% if total_questions > 0 %}
+                <div class="h-full bg-emerald-500 transition-all duration-700" style="width: {{ (retired_count / total_questions * 100) }}%" title="Mastered"></div>
+                <div class="h-full bg-blue-500 transition-all duration-700" style="width: {{ ((seen_count - retired_count) / total_questions * 100) }}%" title="Seen"></div>
+                {% endif %}
+            </div>
+            <div class="flex gap-4 mt-2 text-xs text-slate-500">
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block"></span> Mastered ({{ retired_count }})</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-blue-500 inline-block"></span> Seen ({{ seen_count - retired_count }})</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded-full bg-slate-700 inline-block"></span> Unseen ({{ unseen_count }})</span>
             </div>
         </div>
 
@@ -119,6 +160,27 @@
                 ✓ Proficient
             </div>
             {% endif %}
+
+                    <!-- Incorrect questions for this domain (Task 4) -->
+                    {% set domain_incorrect = stats.incorrect_history | selectattr('domain', 'equalto', domain) | list %}
+                    {% if domain_incorrect %}
+                    <div class="mt-4 border-t border-slate-700/50 pt-4">
+                        <p class="text-xs font-bold text-red-400/80 uppercase tracking-widest mb-2 flex items-center gap-1.5">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                            </svg>
+                            Questions Missed ({{ domain_incorrect | length }})
+                        </p>
+                        <div class="space-y-1.5">
+                            {% for item in domain_incorrect | sort(attribute='number') %}
+                            <div class="flex items-start gap-2 text-sm">
+                                <span class="text-red-400/70 font-mono font-bold text-xs mt-0.5 shrink-0 w-10">Q{{ item.number }}</span>
+                                <span class="text-slate-400 leading-snug text-xs">{{ item.text | truncate(120) }}</span>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
         </div>
         {% endfor %}
     </div>
@@ -167,6 +229,136 @@
         </div>
     </div>
     {% endif %}
+
+    <!-- Incorrect Questions History (Task 6 + Task 8: selectable for review quiz) -->
+    {% if stats.incorrect_history %}
+    <div>
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>
+            Questions You Got Wrong
+        </h2>
+        <p class="text-xs text-slate-500 mb-4">Select questions below and click "Quiz Selected" to review them. Questions are removed after 3 consecutive correct answers.</p>
+        <form method="POST" action="/start_review_quiz" id="reviewForm">
+        <div class="bg-slate-800 border border-slate-700 rounded-2xl overflow-hidden">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-700 text-slate-500 text-xs uppercase tracking-widest">
+                        <th class="px-3 py-3 w-10">
+                            <input type="checkbox" id="select-all" class="rounded bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500 cursor-pointer" title="Select all">
+                        </th>
+                        <th class="text-left px-3 py-3 w-20">#</th>
+                        <th class="text-left px-4 py-3">Question</th>
+                        <th class="text-center px-3 py-3 w-28 hidden md:table-cell">Right / Wrong</th>
+                        <th class="text-left px-4 py-3 hidden md:table-cell w-48">Domain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in stats.incorrect_history | sort(attribute='number') %}
+                    {% set row_class = "border-b border-slate-700/50" if not loop.last else "" %}
+                    {% set rec = stats.question_record.get(item.question_id | string, {'correct': 0, 'incorrect': 0}) %}
+                    <tr class="{{ row_class }} hover:bg-slate-700/30 transition-colors">
+                        <td class="px-3 py-4 text-center">
+                            <input type="checkbox" name="review_questions" value="{{ item.question_id }}"
+                                class="review-checkbox rounded bg-slate-700 border-slate-600 text-blue-500 focus:ring-blue-500 cursor-pointer">
+                        </td>
+                        <td class="px-3 py-4 text-red-400 font-bold font-mono">Q{{ item.number }}</td>
+                        <td class="px-4 py-4 text-slate-300 text-sm leading-snug">{{ item.text | truncate(150) }}</td>
+                        <td class="px-3 py-4 text-center hidden md:table-cell">
+                            <span class="text-emerald-400 font-bold text-xs">{{ rec.correct }}</span>
+                            <span class="text-slate-600 text-xs mx-0.5">/</span>
+                            <span class="text-red-400 font-bold text-xs">{{ rec.incorrect }}</span>
+                        </td>
+                        <td class="px-4 py-4 hidden md:table-cell">
+                            <span class="px-2 py-0.5 bg-slate-700 rounded-full text-xs text-blue-400 font-semibold">{{ item.domain }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="flex items-center justify-between mt-3">
+            <p class="text-xs text-slate-600">{{ stats.incorrect_history | length }} question{{ 's' if stats.incorrect_history | length != 1 else '' }} to review</p>
+            <div class="flex items-center gap-3">
+                <span id="selected-count" class="text-xs text-slate-500">0 selected</span>
+                <button type="submit" id="review-btn" disabled formaction="/start_review_quiz"
+                    class="flex items-center gap-2 px-4 py-2.5 bg-amber-600 hover:bg-amber-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-semibold rounded-2xl transition-all text-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+                    Quiz Now
+                </button>
+                <button type="submit" id="queue-btn" disabled formaction="/queue_for_quiz"
+                    class="flex items-center gap-2 px-4 py-2.5 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-semibold rounded-2xl transition-all text-sm">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                    Add to Next Quiz
+                </button>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    {% endif %}
+
+    <!-- Mastered Questions (Task 10) -->
+    {% if mastered_questions %}
+    <div>
+        <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
+            <svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Questions You Mastered
+        </h2>
+        <p class="text-xs text-slate-500 mb-4">These questions were answered correctly 3 consecutive times and are excluded from future quizzes.</p>
+        <div class="bg-slate-800 border border-emerald-500/20 rounded-2xl overflow-hidden">
+            <table class="w-full text-sm">
+                <thead>
+                    <tr class="border-b border-slate-700 text-slate-500 text-xs uppercase tracking-widest">
+                        <th class="text-left px-6 py-3 w-20">#</th>
+                        <th class="text-left px-4 py-3">Question</th>
+                        <th class="text-left px-4 py-3 hidden md:table-cell w-48">Domain</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in mastered_questions %}
+                    {% set row_class = "border-b border-slate-700/50" if not loop.last else "" %}
+                    <tr class="{{ row_class }} hover:bg-slate-700/30 transition-colors">
+                        <td class="px-6 py-4 text-emerald-400 font-bold font-mono">Q{{ item.number }}</td>
+                        <td class="px-4 py-4 text-slate-300 text-sm leading-snug">{{ item.text | truncate(150) }}</td>
+                        <td class="px-4 py-4 hidden md:table-cell">
+                            <span class="px-2 py-0.5 bg-emerald-900/30 rounded-full text-xs text-emerald-400 font-semibold">{{ item.domain }}</span>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <p class="text-xs text-slate-600 mt-2 text-right">{{ mastered_questions | length }} question{{ 's' if mastered_questions | length != 1 else '' }} mastered</p>
+    </div>
+    {% endif %}
+
+    <script>
+        // Select-all toggle (only if elements exist)
+        if (document.getElementById('select-all')) {
+            document.getElementById('select-all').addEventListener('change', function() {
+                document.querySelectorAll('.review-checkbox').forEach(cb => cb.checked = this.checked);
+                updateSelectedCount();
+            });
+            // Individual checkbox changes
+            document.querySelectorAll('.review-checkbox').forEach(cb => {
+                cb.addEventListener('change', updateSelectedCount);
+            });
+        }
+        function updateSelectedCount() {
+            const checked = document.querySelectorAll('.review-checkbox:checked').length;
+            document.getElementById('selected-count').textContent = checked + ' selected';
+            document.getElementById('review-btn').disabled = checked === 0;
+            document.getElementById('queue-btn').disabled = checked === 0;
+            // Update select-all state
+            const total = document.querySelectorAll('.review-checkbox').length;
+            document.getElementById('select-all').checked = checked === total && total > 0;
+            document.getElementById('select-all').indeterminate = checked > 0 && checked < total;
+        }
+    </script>
 
     {% endif %}
     </div>

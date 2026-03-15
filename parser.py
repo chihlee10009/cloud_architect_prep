@@ -1,6 +1,6 @@
 """
 Parser for Cloud Architect Prep App.
-Primary source: ref_cloud_architect_qa.md
+Primary source: ref_cloud_architect_questions.md
 Each question is tagged with a GCP Professional Cloud Architect exam domain.
 """
 
@@ -8,8 +8,8 @@ import re
 import json
 import os
 
-QA_FILE = "ref_cloud_architect_qa.md"
-OUTPUT  = "questions.json"
+QA_FILE = "ref_cloud_architect_questions.md"
+OUTPUT  = "questions_draft.json"
 
 # ------------------------------------------------------------------
 # Domain classification: maps question numbers to exam domains.

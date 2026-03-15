@@ -20,7 +20,34 @@
             <p class="text-slate-400 text-lg">Master the Google Cloud Professional Cloud Architect Certification.</p>
         </div>
 
-        <div class="bg-slate-800 border border-slate-700 rounded-3xl p-8 shadow-2xl relative overflow-hidden">
+        <!-- Quiz Mode Tabs -->
+        <div class="flex mb-0 rounded-t-2xl overflow-hidden border border-b-0 border-slate-700">
+            <button id="tab-regular" onclick="switchMode('regular')"
+                class="flex-1 py-3 px-4 text-sm font-bold transition-all bg-slate-800 text-blue-400 border-b-2 border-blue-500">
+                📝 Regular
+            </button>
+            <button id="tab-wrong" onclick="switchMode('wrong')"
+                class="flex-1 py-3 px-4 text-sm font-bold transition-all bg-slate-900 text-slate-500 border-b-2 border-transparent hover:text-slate-300
+                {% if wrong_count == 0 %}opacity-50 cursor-not-allowed{% endif %}"
+                {% if wrong_count == 0 %}disabled{% endif %}>
+                🔄 Wrong
+                {% if wrong_count > 0 %}
+                <span class="ml-1 px-1.5 py-0.5 bg-red-500/20 text-red-400 rounded-full text-xs font-bold">{{ wrong_count }}</span>
+                {% endif %}
+            </button>
+            <button id="tab-unseen" onclick="switchMode('unseen')"
+                class="flex-1 py-3 px-4 text-sm font-bold transition-all bg-slate-900 text-slate-500 border-b-2 border-transparent hover:text-slate-300
+                {% if unseen_count == 0 %}opacity-50 cursor-not-allowed{% endif %}"
+                {% if unseen_count == 0 %}disabled{% endif %}>
+                🆕 Unseen
+                {% if unseen_count > 0 %}
+                <span class="ml-1 px-1.5 py-0.5 bg-emerald-500/20 text-emerald-400 rounded-full text-xs font-bold">{{ unseen_count }}</span>
+                {% endif %}
+            </button>
+        </div>
+
+        <!-- Regular Quiz Form -->
+        <div id="mode-regular" class="bg-slate-800 border border-slate-700 rounded-b-3xl p-8 shadow-2xl relative overflow-hidden">
             <div class="absolute top-0 right-0 p-4 opacity-10">
                 <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
             </div>
@@ -33,6 +60,17 @@
                     <p class="mt-2 text-xs text-slate-500">{{ total_questions }} questions available in total.</p>
                 </div>
                 
+                {% if queued_count > 0 %}
+                <div class="bg-blue-900/30 border border-blue-500/30 rounded-xl p-3 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" /></svg>
+                        <span class="text-xs text-blue-300 font-semibold">{{ queued_count }} question{{ 's' if queued_count != 1 else '' }} queued from dashboard</span>
+                    </div>
+                    <button type="button" onclick="clearQueue()" class="text-xs text-slate-500 hover:text-red-400 transition-colors">✕ Clear</button>
+                </div>
+                <p class="text-xs text-slate-500 -mt-3">These will be included in your next quiz automatically.</p>
+                {% endif %}
+
                 <button type="submit" 
                     class="w-full bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white font-bold py-4 rounded-xl shadow-lg shadow-blue-500/20 transform transition hover:-translate-y-1 active:scale-95">
                     Start Quiz Now
@@ -40,7 +78,59 @@
             </form>
         </div>
 
-        <div class="mt-12 flex justify-center gap-6 text-slate-500 text-sm">
+        <!-- Wrong Questions Quiz Form -->
+        <div id="mode-wrong" class="bg-slate-800 border border-slate-700 rounded-b-3xl p-8 shadow-2xl relative overflow-hidden hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10">
+                <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+            </div>
+            
+            <form action="/start_wrong_quiz" method="POST" class="space-y-6">
+                <div>
+                    <label for="num_wrong_questions" class="block text-sm font-semibold text-slate-300 mb-2">How many wrong questions to review?</label>
+                    <input type="number" id="num_wrong_questions" name="num_questions" value="{{ [10, wrong_count] | min }}" min="1" max="{{ wrong_count }}"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-2xl font-bold focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition-all">
+                    <p class="mt-2 text-xs text-slate-500">{{ wrong_count }} wrong question{{ 's' if wrong_count != 1 else '' }} available from the "Questions You Got Wrong" list.</p>
+                </div>
+                
+                <button type="submit" 
+                    class="w-full bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white font-bold py-4 rounded-xl shadow-lg shadow-amber-500/20 transform transition hover:-translate-y-1 active:scale-95">
+                    🔄 Quiz Wrong Questions
+                </button>
+            </form>
+
+            <p class="mt-4 text-xs text-slate-600">To select specific questions, go to the
+                <a href="/stats" class="text-blue-400 hover:text-blue-300 underline">Performance Dashboard</a>.</p>
+        </div>
+
+        <!-- Unseen Questions Quiz Form -->
+        <div id="mode-unseen" class="bg-slate-800 border border-slate-700 rounded-b-3xl p-8 shadow-2xl relative overflow-hidden hidden">
+            <div class="absolute top-0 right-0 p-4 opacity-10">
+                <svg class="w-32 h-32" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 3c1.93 0 3.5 1.57 3.5 3.5S13.93 13 12 13s-3.5-1.57-3.5-3.5S10.07 6 12 6zm7 13H5v-.23c0-.62.28-1.2.76-1.58C7.47 15.82 9.64 15 12 15s4.53.82 6.24 2.19c.48.38.76.97.76 1.58V19z"/></svg>
+            </div>
+            
+            <form action="/start_unseen_quiz" method="POST" class="space-y-6">
+                <div>
+                    <label for="num_unseen_questions" class="block text-sm font-semibold text-slate-300 mb-2">How many unseen questions?</label>
+                    <input type="number" id="num_unseen_questions" name="num_questions" value="{{ [10, unseen_count] | min }}" min="1" max="{{ unseen_count }}"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-2xl font-bold focus:ring-2 focus:ring-emerald-500 focus:border-transparent outline-none transition-all">
+                    <p class="mt-2 text-xs text-slate-500">{{ unseen_count }} unseen question{{ 's' if unseen_count != 1 else '' }} remaining that haven't appeared in any quiz yet.</p>
+                </div>
+                
+                <button type="submit" 
+                    class="w-full bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 hover:to-emerald-400 text-white font-bold py-4 rounded-xl shadow-lg shadow-emerald-500/20 transform transition hover:-translate-y-1 active:scale-95">
+                    🆕 Quiz Unseen Questions
+                </button>
+            </form>
+        </div>
+
+        <div class="mt-8">
+            <a href="/stats" class="inline-flex items-center gap-2 text-slate-500 hover:text-blue-400 text-sm font-semibold transition-colors">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                📊 Performance Dashboard
+            </a>
+        </div>
+
+        <div class="mt-8 flex justify-center gap-6 text-slate-500 text-sm">
             <div class="flex items-center gap-2">
                 <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
                 Interactive
@@ -55,5 +145,28 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function clearQueue() {
+            fetch('/clear_queue', { method: 'POST' }).then(function() { window.location.reload(); });
+        }
+        function switchMode(mode) {
+            const inactive = 'flex-1 py-3 px-4 text-sm font-bold transition-all bg-slate-900 text-slate-500 border-b-2 border-transparent hover:text-slate-300';
+            const tabs = {
+                regular: { tab: document.getElementById('tab-regular'), panel: document.getElementById('mode-regular'), active: 'flex-1 py-3 px-4 text-sm font-bold transition-all bg-slate-800 text-blue-400 border-b-2 border-blue-500' },
+                wrong:   { tab: document.getElementById('tab-wrong'),   panel: document.getElementById('mode-wrong'),   active: 'flex-1 py-3 px-4 text-sm font-bold transition-all bg-slate-800 text-amber-400 border-b-2 border-amber-500' },
+                unseen:  { tab: document.getElementById('tab-unseen'),  panel: document.getElementById('mode-unseen'),  active: 'flex-1 py-3 px-4 text-sm font-bold transition-all bg-slate-800 text-emerald-400 border-b-2 border-emerald-500' },
+            };
+            for (const [key, t] of Object.entries(tabs)) {
+                if (key === mode) {
+                    t.tab.className = t.active;
+                    t.panel.classList.remove('hidden');
+                } else {
+                    t.tab.className = inactive;
+                    t.panel.classList.add('hidden');
+                }
+            }
+        }
+    </script>
 </body>
 </html>
